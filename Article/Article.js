@@ -161,4 +161,3 @@ function createArticle(title, date, firstParagraph, secondParagraph, thirdParagr
   return newArticle;
 
 }
-
