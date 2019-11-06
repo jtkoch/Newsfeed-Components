@@ -85,30 +85,79 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: "Delicious food",
+    date: "November 5th, 2019",
+    firstParagraph: "Hello, Bonjour, Hola, Hallo, Hello, Bonjour, Hola, Hallo, Hello, Bonjour, Hola, Hallo, Hello, Bonjour, Hola, Hallo",
+    secondParagraph: "Goodbye, Au revoir, adiós, Auf Wiedersehen, Goodbye, Au revoir, adiós, Auf Wiedersehen, Goodbye, Au revoir, adiós, Auf Wiedersehen",
+    thirdParagraph: "Cheeseburger, Croissant, Tacos al pastor, Schnitzel, Cheeseburger, Croissant, Tacos al pastor, Schnitzel, Cheeseburger, Croissant, Tacos al pastor, Schnitzel"
   }
 ];
 
-/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
+// Step 1: Create a function that creates a component. You will want your component to look like the template below: 
+
+// Hint: You will need to use createElement more than once here!
+
+// Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
   
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
+  // <div class="article">
+  //   <h2>{title of the article}</h2>
+  //   <p class="date">{date of the article}</p>
 
-    {three separate paragraph elements}
+  //   {three separate paragraph elements}
 
-    <span class='expandButton'></span>
-  </div>
+  //   <span class='expandButton'></span>
+  // </div>
+ 
+// Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
-  Hint: You will need to use createElement more than once here!
+// Step 3: return the entire component.
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+// Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+// Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.  
 
-  Step 3: return the entire component.
+const articles = document.querySelector('.articles');
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+data.forEach(info => {
+  articles.appendChild(createArticle(info.title, info.date, info.firstParagraph, info.secondParagraph, info.thirdParagraph))
+});
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+  const newArticle = document.createElement("div");
+  const newTitle = document.createElement("h2");
+  const newDate = document.createElement("p");
+  const newFirstParagraph = document.createElement("p");
+  const newSecondParagraph = document.createElement("p");
+  const newThirdParagraph = document.createElement("p");
+  const newExpandButton = document.createElement("span"); 
 
-*/
+  newArticle.appendChild(newTitle);
+  newArticle.appendChild(newDate);
+  newArticle.appendChild(newFirstParagraph);
+  newArticle.appendChild(newSecondParagraph);
+  newArticle.appendChild(newThirdParagraph);
+  newArticle.appendChild(newExpandButton);
+
+  newArticle.classList.add("article");
+  newDate.classList.add("date");
+  newFirstParagraph.classList.add("p");
+  newSecondParagraph.classList.add("p");
+  newThirdParagraph.classList.add("p");
+  newExpandButton.classList.add("expandButton");
+
+  newTitle.textContent = title;
+  newDate.textContent = date;
+  newFirstParagraph.textContent = firstParagraph;
+  newSecondParagraph.textContent = secondParagraph;
+  newThirdParagraph.textContent = thirdParagraph;
+  newExpandButton.textContent = "Show more";
+
+  newExpandButton.addEventListener("click", () => {
+    newArticle.classList.toggle("article-open");
+  });
+
+  return newArticle;
+
+}
